@@ -154,13 +154,51 @@ EfficientNetB0 performs best at both page and region levels. Region-level evalua
 | --- | --- | --- |
 | Published paper | Available | [Springer / DOI](https://doi.org/10.1007/978-3-032-36039-7_23) |
 | README and benchmark documentation | Available | This repository |
-| **KSI-Small** public test sample | **Coming soon** | Limited public research sample |
+| **Angkorian-KSI-Small (KSI-Small)** public test sample | **Coming soon** | Limited public research sample |
 | Evaluation code and official split files | Coming soon | This repository / Angkorian-AI |
 | Complete Angkorian-KSI benchmark | Restricted | Approved cultural-heritage research only |
 
 ## KSI-Small: Coming Soon
 
-**KSI-Small** will provide a limited public test sample from the benchmark so researchers can inspect the data structure, test input/output formats, and evaluate the basic workflow without receiving the restricted complete collection.
+**Angkorian-KSI-Small (KSI-Small)** will provide a limited public test sample from the benchmark so researchers can inspect the data structure, test input/output formats, and evaluate the basic workflow without receiving the restricted complete collection.
+
+> [!CAUTION]
+> **KSI-Small is an intentionally small, data-limited sample.** It does not represent the scale, diversity, or statistical reliability of the complete Angkorian-KSI benchmark. The results below are preliminary and diagnostic; they should not be treated as definitive model rankings or directly compared with the full-benchmark results reported above.
+
+### Preliminary KSI-B Results on Angkorian-KSI-Small
+
+| Method | Track | F ↑ | pseudo-F ↑ | PSNR ↑ | DRD ↓ | Seconds/image ↓ |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Otsu | Train-tuned | 0.155 | 0.146 | 2.867 | 102.43 | **0.0077** |
+| Sauvola | Train-tuned | 0.141 | 0.134 | 6.163 | 47.39 | 0.0190 |
+| Wolf-Jolion | Train-tuned | 0.140 | 0.128 | 6.367 | 43.14 | 0.0128 |
+| SAE/DAE | Zero-shot | 0.219 | 0.205 | 5.202 | 62.70 | 0.6111 |
+| DP-LinkNet | Zero-shot | 0.088 | 0.097 | **8.553** | **22.85** | 0.4786 |
+| DE-GAN | Zero-shot | 0.3550 | **0.347** | 3.807 | 89.52 | 3.0661 |
+| PALM-GAN | Zero-shot | **0.3611** | 0.341 | 3.591 | 90.68 | 2.8498 |
+| DocEnTr | Zero-shot | 0.130 | 0.129 | 8.378 | 24.76 | 4.3325 |
+| DocDiff pilot | DIBCO zero-shot | 0.203 | 0.199 | 0.695 | 165.92 | 5.4442 |
+| SAE/DAE | KSI fine-tuned | 0.163 | 0.165 | 6.630 | 41.53 | 0.6107 |
+| DocDiff pilot | KSI fine-tuned | 0.227 | 0.227 | 1.526 | 135.56 | 5.4155 |
+
+**Metric directions:** higher values are better for F, pseudo-F, and PSNR; lower values are better for DRD and seconds per image. Bold indicates the best reported value for each metric.
+
+#### Track definitions
+
+- **Train-tuned:** classical method parameters were selected using the available KSI-Small training portion.
+- **Zero-shot:** the pretrained method was evaluated without KSI-Small fine-tuning.
+- **DIBCO zero-shot:** the DocDiff pilot was evaluated in its DIBCO-domain setting without KSI-Small fine-tuning.
+- **KSI fine-tuned:** the model was adapted using the limited KSI-Small training portion.
+
+#### Preliminary observations
+
+- PALM-GAN records the highest F score (**0.3611**), while DE-GAN obtains the highest pseudo-F (**0.347**).
+- DP-LinkNet obtains both the highest PSNR (**8.553**) and the lowest DRD (**22.85**).
+- Otsu is the fastest method at **0.0077 seconds per image**.
+- No method dominates every metric, reflecting different sensitivity to stroke preservation, background suppression, and image fidelity.
+- KSI fine-tuning does not consistently improve performance in this pilot. This may reflect the very limited training sample and should not be interpreted as a general conclusion about fine-tuning on the complete benchmark.
+
+Because KSI-Small contains limited data and restricted coverage of sites, historical periods, degradation patterns, and surface conditions, its scores may have high variance. The sample is intended for pipeline verification, format testing, and preliminary reproducibility checks—not for training data-hungry models or drawing broad performance conclusions.
 
 The sample will be released separately with its own permitted-use notice. Availability of KSI-Small will **not** imply open access to, or redistribution rights for, the complete Angkorian-KSI benchmark.
 
