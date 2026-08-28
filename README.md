@@ -8,7 +8,7 @@
 
 ## A Multi-task Benchmark for Khmer Stone Inscription Analysis
 
-Official repository for **Angkorian-KSI: A Multi-task Benchmark for Khmer Stone Inscription Analysis**, published in the proceedings of the **18th International Conference on Document Analysis and Recognition (ICDAR 2026)**.
+Official repository for **Angkorian-KSI: A Multi-task Benchmark for Khmer Stone Inscription Analysis**, published in the proceedings of the **18th International Conference on Document Analysis and Recognition (ICDAR 2026, Vienna, Austria)**.
 
 > **Publication status:** First published online on **24 August 2026** in *Document Analysis and Recognition - ICDAR 2026*, Lecture Notes in Computer Science, volume 16974, pages 387-404. Springer’s official bibliographic citation uses the publication year **2027**.
 
