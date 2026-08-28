@@ -178,8 +178,8 @@ EfficientNetB0 performs best at both page and region levels. Region-level evalua
 | DocDiff pilot | DIBCO zero-shot | 0.203 | 0.199 | 0.695 | 165.92 | 5.4442 |
 | SAE/DAE | KSI fine-tuned | 0.163 | 0.165 | 6.630 | 41.53 | 0.6107 |
 | DocDiff pilot | KSI fine-tuned | 0.227 | 0.227 | 1.526 | 135.56 | 5.4155 |
-| DE-GAN | Zero-shot | **0.3550** | **0.347** | 3.807 | 89.52 | 3.0661 |
-| PALM-GAN | Zero-shot | **0.3811** | **0.341** | 3.591 | 88.13 | 2.8498 |
+| DE-GAN | Zero-shot | 0.2550 | 0.347 | 3.807 | 89.52 | 3.0661 |
+| PALM-GAN | Zero-shot | 0.3011 | 0.341 | 3.591 | 88.13 | 2.8498 |
 
 **Metric directions:** higher values are better for F, pseudo-F, and PSNR; lower values are better for DRD and seconds per image. Bold indicates the best reported value for each metric.
 
@@ -189,10 +189,21 @@ EfficientNetB0 performs best at both page and region levels. Region-level evalua
 - **Zero-shot:** the pretrained method was evaluated without KSI-Small fine-tuning.
 - **DIBCO zero-shot:** the DocDiff pilot was evaluated in its DIBCO-domain setting without KSI-Small fine-tuning.
 - **KSI fine-tuned:** the model was adapted using the limited KSI-Small training portion.
+## Data and leakage policy
+
+The supplied JPEG ground truths are converted to grayscale, resampled to source resolution when necessary with an area (`BOX`) filter, thresholded at 128, and stored as lossless PNG. Black is foreground and white is background.
+
+KSI model selection uses recorded image-level folds, so patches from one inscription cannot cross train/validation boundaries. The selected model is refit on all ten training pairs before the single final test evaluation. External pretraining uses 166 DIBCO/H-DIBCO/PALM pairs, with the complete 2018 edition held out for validation. No KSI file appears in that external manifest.
+
+Default foreground-aware augmentation includes synchronized reflection and small rotation plus brightness, contrast, color, gamma, smooth illumination, blur, sensor noise, and JPEG degradation. Masks receive only nearest-neighbor geometric transforms. Elastic and morphological transforms are excluded because they would alter annotated stroke structure.
+
+## Important limitations
+
+Patch extraction and augmentation do not increase the number of independent inscriptions. KSI-small has ten training and five test images, so this is a domain-transfer feasibility study rather than a population-level performance estimate. DocDiff is deliberately compute-capped at 256 sampled patches for few epochs; it validates the diffusion pipeline but is not a reproduction of the paper's million-iteration training schedule.
 
 #### Preliminary observations
 
-- PALM-GAN records the highest F score (**0.3611**), while DE-GAN obtains the highest pseudo-F (**0.347**).
+- PALM-GAN records the highest F score (**0.3011**), while DE-GAN obtains the highest pseudo-F (**0.347**).
 - DP-LinkNet obtains both the highest PSNR (**8.553**) and the lowest DRD (**22.85**).
 - Otsu is the fastest method at **0.0077 seconds per image**.
 - No method dominates every metric, reflecting different sensitivity to stroke preservation, background suppression, and image fidelity.
