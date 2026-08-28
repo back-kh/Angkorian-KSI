@@ -213,12 +213,8 @@ If Angkorian-KSI supports your research, please cite the published paper:
 
 ## Project Team
 
-| Contributor | Role and affiliation |
-| --- | --- |
-| **Dr. Nimol Thuon** | Project lead; NERC-SLIP, University of Science and Technology of China, Hefei, China |
-| **Prof. Jun Du** | Co-author and corresponding author; NERC-SLIP, University of Science and Technology of China, Hefei, China |
-| **Ranysakol Thuon** | Co-author; Paragon International University, Phnom Penh, Cambodia |
-| **Panhapin Theang** | Co-author; Université Paris Cité, Paris, France |
+| **Dr. Nimol Thuon** | Project lead;  nimol.thuon@gmail.com|
+
 
 ## Acknowledgements
 
