@@ -174,12 +174,12 @@ EfficientNetB0 performs best at both page and region levels. Region-level evalua
 | Wolf-Jolion | Train-tuned | 0.140 | 0.128 | 6.367 | 43.14 | 0.0128 |
 | SAE/DAE | Zero-shot | 0.219 | 0.205 | 5.202 | 62.70 | 0.6111 |
 | DP-LinkNet | Zero-shot | 0.088 | 0.097 | **8.553** | **22.85** | 0.4786 |
-| DE-GAN | Zero-shot | 0.3550 | **0.347** | 3.807 | 89.52 | 3.0661 |
-| PALM-GAN | Zero-shot | **0.3611** | 0.341 | 3.591 | 90.68 | 2.8498 |
 | DocEnTr | Zero-shot | 0.130 | 0.129 | 8.378 | 24.76 | 4.3325 |
 | DocDiff pilot | DIBCO zero-shot | 0.203 | 0.199 | 0.695 | 165.92 | 5.4442 |
 | SAE/DAE | KSI fine-tuned | 0.163 | 0.165 | 6.630 | 41.53 | 0.6107 |
 | DocDiff pilot | KSI fine-tuned | 0.227 | 0.227 | 1.526 | 135.56 | 5.4155 |
+| DE-GAN | Zero-shot | **0.3550** | **0.347** | 3.807 | 89.52 | 3.0661 |
+| PALM-GAN | Zero-shot | **0.3811** | **0.341** | 3.591 | 88.13 | 2.8498 |
 
 **Metric directions:** higher values are better for F, pseudo-F, and PSNR; lower values are better for DRD and seconds per image. Bold indicates the best reported value for each metric.
 
