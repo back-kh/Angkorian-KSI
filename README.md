@@ -3,62 +3,198 @@
 [![Paper](https://img.shields.io/badge/Paper-Springer-0645AD.svg)](https://doi.org/10.1007/978-3-032-36039-7_23)
 [![Conference](https://img.shields.io/badge/Conference-ICDAR%202026-8A2BE2.svg)](https://icdar2026.org/)
 [![DOI](https://img.shields.io/badge/DOI-10.1007%2F978--3--032--36039--7__23-0A7BBB.svg)](https://doi.org/10.1007/978-3-032-36039-7_23)
+[![KSI-Small](https://img.shields.io/badge/KSI--Small-Coming%20Soon-F59E0B.svg)](#ksi-small-coming-soon)
+[![Access](https://img.shields.io/badge/Full%20Benchmark-Restricted-B91C1C.svg)](#data-access-and-use-restrictions)
 
 ## A Multi-task Benchmark for Khmer Stone Inscription Analysis
 
-This is the official repository for **Angkorian-KSI: A Multi-task Benchmark for Khmer Stone Inscription Analysis**, published in the proceedings of the **18th International Conference on Document Analysis and Recognition (ICDAR 2026)**.
+Official repository for **Angkorian-KSI: A Multi-task Benchmark for Khmer Stone Inscription Analysis**, published in the proceedings of the **18th International Conference on Document Analysis and Recognition (ICDAR 2026)**.
 
-> **Publication update:** The chapter was first published online on **24 August 2026** in *Document Analysis and Recognition – ICDAR 2026*, Lecture Notes in Computer Science, volume 16974, pages 387–404. Springer’s official bibliographic citation uses the publication year **2027**.
+> **Publication status:** First published online on **24 August 2026** in *Document Analysis and Recognition - ICDAR 2026*, Lecture Notes in Computer Science, volume 16974, pages 387-404. Springer’s official bibliographic citation uses the publication year **2027**.
+
+**Paper:** [Springer](https://link.springer.com/chapter/10.1007/978-3-032-36039-7_23) | [DOI](https://doi.org/10.1007/978-3-032-36039-7_23) | [Angkorian-AI](https://angkorianai.github.io/)
 
 ## Overview
 
-Khmer stone inscriptions are essential records of Cambodia’s linguistic, historical, religious, and cultural heritage. Their computational analysis is substantially more difficult than the analysis of planar manuscripts because carved surfaces are affected by relief-induced shadows, erosion, biological growth, material loss, irregular illumination, complex stone textures, and script variation across historical periods.
+Khmer stone inscriptions are primary records of Cambodia’s linguistic, historical, religious, and cultural heritage. Automated analysis is difficult because carved stone differs fundamentally from planar documents: relief-induced shadows, erosion, biological growth, surface damage, irregular illumination, complex stone texture, and gradual script evolution all obscure the inscription structure.
 
-**Angkorian-KSI** introduces the first multi-task benchmark designed specifically for automated Khmer stone inscription analysis. The benchmark was curated from in-situ captures collected across multiple sites within a UNESCO World Heritage archaeological region in Cambodia. It establishes a unified evaluation setting for structural detection, inscription binarization, and historical script-period classification.
+**Angkorian-KSI** is the first multi-task benchmark designed specifically for automated Khmer stone inscription analysis. It was curated from in-situ captures collected across **10 temple sites** within a UNESCO World Heritage archaeological region in Cambodia and supports three connected tasks:
+
+- **KSI-LA:** layout analysis of text regions, text lines, and applicable non-text elements.
+- **KSI-B:** binary text-mask extraction from degraded stone surfaces.
+- **KSI-C:** historical script-period classification across Pre-Angkorian, Angkorian, and Post-Angkorian periods.
+
+## Benchmark Workflow
+
+![Angkorian-KSI benchmark workflow](assets/workflow.png)
+
+*Figure 3 from the paper. The workflow connects in-situ acquisition and annotation with layout analysis, binarization, and historical script-period classification.*
+
+The annotation pipeline uses three quality-control stages:
+
+1. Automatic initialization using classical image processing and detection-assisted preprocessing.
+2. Manual refinement with polygon-based and pixel-accurate annotation tools.
+3. Expert verification of degraded, ambiguous, or partially broken inscriptions.
 
 ## Benchmark Tasks
 
-| Task | Objective | Input | Output |
+| Task | Input | Ground truth | Primary evaluation |
 | --- | --- | --- | --- |
-| **KSI-LA** | Layout analysis and structural detection | Full inscription images | Text-region and text-line bounding boxes |
-| **KSI-B** | Carved-text image binarization | Text-region and text-line crops | Binary foreground–background masks |
-| **KSI-C** | Historical script-period classification | Full images and annotated text regions | Pre-Angkorian, Angkorian, or Post-Angkorian labels |
+| **KSI-LA** | Full inscription images | Text-region, text-line, and applicable non-text boxes | Per-class AP@0.5 and mAP@0.5 |
+| **KSI-B** | Text-region and text-line crops | Pixel-level binary masks | Precision, recall, F1, PSNR, and DRD |
+| **KSI-C** | Full images and text-region crops | Historical period labels | Accuracy and macro-F1 |
 
-## Dataset at a Glance
+## Dataset Statistics
 
-| Benchmark component | Number |
-| --- | ---: |
-| Full inscription images | 230 |
-| Annotated text regions | 760 |
-| Annotated text lines | 2,733 |
-| Binarization masks | 3,493 |
-| Script-period labels | 534 |
+| Component | Quantity | Annotation type |
+| --- | ---: | --- |
+| Full inscription images | 230 | Layout and metadata |
+| Annotated text regions | 760 | Polygon masks |
+| Annotated text lines | 2,733 | Polygon masks |
+| Binarization masks | 3,493 | Binary masks |
+| Script-period labels | 534 | Page/region labels |
+| Temple sites | 10 | Site metadata |
 
-These figures correspond to the benchmark reported in the published paper.
+### Page-level split
 
-## Evaluation Protocol
+| Split | Pre-Angkorian | Angkorian | Post-Angkorian | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Train (70%) | 28 | 112 | 21 | 161 |
+| Validation (15%) | 6 | 24 | 4 | 34 |
+| Test (15%) | 6 | 24 | 5 | 35 |
+| **All** | **40** | **160** | **30** | **230** |
 
-- Dataset partitions are defined at the source-image level to prevent derived crops from crossing evaluation splits.
-- Temple-level separation is applied where feasible to reduce site-specific leakage.
-- Text-region and text-line samples inherit the split of their source image.
-- Representative detection, binarization, convolutional, and transformer-based baselines are used to measure the domain gap between conventional document images and degraded carved-stone inscriptions.
+Splits are assigned at the full-image level. Temple-level separation is enforced whenever sufficient samples are available, and every derived region or line crop inherits the split of its source image.
 
-The benchmark is intended to support reproducible comparison rather than to promote a single model architecture. The reported results show that methods developed for ordinary document images do not transfer reliably to carved Khmer inscriptions, motivating dedicated models and evaluation protocols for this domain.
+## Annotation Examples
 
-## Paper
+![Angkorian-KSI annotation examples](assets/annotations.png)
+
+*Figure 4 from the paper. Representative structural, binarization, and script-period annotations.*
+
+Ambiguous regions are handled conservatively. Annotators do not reconstruct unreadable characters or invent missing stroke boundaries when the available visual evidence is insufficient.
+
+## Experimental Setup
+
+- **Hardware:** two NVIDIA RTX A6000 GPUs.
+- **Optimization:** AdamW, initial learning rate 1 × 10^-4, weight decay 1 × 10^-4, batch size 16, and 100 epochs.
+- **Model selection:** validation mAP@0.5 for KSI-LA, validation F1 for KSI-B, and validation macro-F1 for KSI-C.
+- **Binarization training:** pixel-wise binary cross-entropy, optionally combined with Dice loss.
+
+## Benchmark Results
+
+All results below are reproduced from the published paper and use the official Angkorian-KSI splits.
+
+### KSI-LA: Layout Analysis
+
+| Method | Text-region AP@0.5 | Text-line AP@0.5 | Other AP@0.5 | mAP@0.5 |
+| --- | ---: | ---: | ---: | ---: |
+| YOLOv8 | 80.12 | 60.34 | 40.25 | 60.24 |
+| YOLOv11 | 84.78 | 67.91 | 48.37 | 67.02 |
+| Faster R-CNN | 88.43 | 72.18 | 52.46 | 71.02 |
+| **DETR** | **92.67** | **79.84** | **57.63** | **76.71** |
+
+DETR obtains the strongest overall layout result, while text-line and non-text detection remain more difficult because of dense line spacing, shadows, adjacent structures, and decorative carvings.
+
+![Qualitative layout-detection results](assets/layout-results.png)
+
+*Figure 5 from the paper. Qualitative comparison of YOLOv11, Faster R-CNN, DETR, and ground truth.*
+
+### KSI-B: Binarization
+
+| Method | Precision ↑ | Recall ↑ | F1 ↑ | PSNR ↑ | DRD ↓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Otsu | 0.18 | 0.51 | 0.23 | 12.0 | 18.7 |
+| Sauvola | 0.22 | 0.44 | 0.28 | 12.6 | 17.5 |
+| DAE | 0.61 | 0.53 | 0.57 | 17.8 | 8.9 |
+| DE-GAN | 0.78 | **0.72** | 0.75 | 21.9 | 4.6 |
+| **PALM-GAN** | **0.80** | **0.72** | **0.77** | **23.4** | **4.2** |
+
+Learning-based approaches substantially outperform classical thresholding. PALM-GAN achieves the best F1, PSNR, and DRD, although faint strokes in heavily eroded regions remain challenging.
+
+![Qualitative binarization results](assets/binarization-results.png)
+
+*Figure 6 from the paper. Comparison of Otsu, Sauvola, DAE, DE-GAN, PALM-GAN, and ground truth.*
+
+### KSI-C: Script-period Classification
+
+| Method | Page accuracy ↑ | Page macro-F1 ↑ | Region accuracy ↑ | Region macro-F1 ↑ |
+| --- | ---: | ---: | ---: | ---: |
+| ResNet50 | 0.82 | 0.76 | 0.84 | 0.80 |
+| **EfficientNetB0** | **0.86** | **0.79** | **0.89** | **0.82** |
+| ViT-B/16 | 0.71 | 0.67 | 0.75 | 0.71 |
+| Swin-T | 0.76 | 0.71 | 0.80 | 0.74 |
+
+EfficientNetB0 performs best at both page and region levels. Region-level evaluation is consistently stronger, indicating that full-image background texture and layout variation add noise to historical period recognition.
+
+#### Region-level per-class F1
+
+| Method | Pre-Angkorian | Angkorian | Post-Angkorian |
+| --- | ---: | ---: | ---: |
+| ResNet50 | 0.74 | 0.85 | 0.81 |
+| **EfficientNetB0** | **0.77** | **0.88** | **0.83** |
+| ViT-B/16 | 0.63 | 0.78 | 0.71 |
+| Swin-T | 0.68 | 0.81 | 0.73 |
+
+![Qualitative script-classification results](assets/classification-results.png)
+
+*Figure 7 from the paper. Correct and incorrect predictions across CNN and transformer-based classifiers.*
+
+## Main Findings
+
+- Carved stone creates a substantial domain gap relative to conventional ink-based document images.
+- Global structural modeling benefits layout analysis; DETR achieves the strongest KSI-LA result.
+- Learning-based binarization is substantially more robust than classical thresholding under stone texture and relief shading.
+- CNN classifiers outperform the tested transformer classifiers in the limited-data KSI-C setting.
+- Errors frequently involve heavily degraded samples and adjacent historical periods with gradual paleographic transitions.
+
+## Release Status
+
+| Resource | Status | Access |
+| --- | --- | --- |
+| Published paper | Available | [Springer / DOI](https://doi.org/10.1007/978-3-032-36039-7_23) |
+| README and benchmark documentation | Available | This repository |
+| **KSI-Small** public test sample | **Coming soon** | Limited public research sample |
+| Evaluation code and official split files | Coming soon | This repository / Angkorian-AI |
+| Complete Angkorian-KSI benchmark | Restricted | Approved cultural-heritage research only |
+
+## KSI-Small: Coming Soon
+
+**KSI-Small** will provide a limited public test sample from the benchmark so researchers can inspect the data structure, test input/output formats, and evaluate the basic workflow without receiving the restricted complete collection.
+
+The sample will be released separately with its own permitted-use notice. Availability of KSI-Small will **not** imply open access to, or redistribution rights for, the complete Angkorian-KSI benchmark.
+
+## Data Access and Use Restrictions
+
+> [!IMPORTANT]
+> **The complete Angkorian-KSI benchmark is not an open or unrestricted dataset. Access and use are strictly limited to approved, non-commercial cultural-heritage research.**
+
+Because the collection contains imagery acquired at protected heritage sites and is subject to site-level, ethical, and data-sharing conditions:
+
+- Full benchmark access requires a reasonable academic request, research-purpose review, and explicit approval from the project team.
+- Approved use must remain within the stated cultural-heritage research scope.
+- Commercial use, resale, public re-hosting, and redistribution of the complete images or annotations are not permitted.
+- Access approval does not transfer ownership or grant permission for any use beyond the approved project.
+- Researchers must follow any additional attribution, reporting, security, and deletion conditions provided with approved access.
+
+Public visibility of this repository, its documentation, paper figures, results, or KSI-Small does **not** grant access to the full benchmark and does **not** waive these restrictions.
+
+Access announcements, documentation, and permitted public resources will be provided through the [Angkorian-AI project website](https://angkorianai.github.io/).
+
+## Paper Information
 
 - **Title:** Angkorian-KSI: A Multi-task Benchmark for Khmer Stone Inscription Analysis
 - **Authors:** Nimol Thuon, Jun Du, Ranysakol Thuon, and Panhapin Theang
-- **Venue:** Document Analysis and Recognition – ICDAR 2026
+- **Venue:** Document Analysis and Recognition - ICDAR 2026
 - **Series:** Lecture Notes in Computer Science, volume 16974
-- **Pages:** 387–404
+- **Pages:** 387-404
 - **Publisher:** Springer, Cham
-- **DOI:** [10.1007/978-3-032-36039-7_23](https://doi.org/10.1007/978-3-032-36039-7_23)
 - **First published online:** 24 August 2026
+- **DOI:** [10.1007/978-3-032-36039-7_23](https://doi.org/10.1007/978-3-032-36039-7_23)
 
 ## Citation
 
-If this benchmark or repository supports your research, please cite the published paper:
+If Angkorian-KSI supports your research, please cite the published paper:
 
 ```bibtex
 @inproceedings{thuon2027angkorian,
@@ -83,12 +219,6 @@ If this benchmark or repository supports your research, please cite the publishe
 | **Prof. Jun Du** | Co-author and corresponding author; NERC-SLIP, University of Science and Technology of China, Hefei, China |
 | **Ranysakol Thuon** | Co-author; Paragon International University, Phnom Penh, Cambodia |
 | **Panhapin Theang** | Co-author; Université Paris Cité, Paris, France |
-
-## Data and Resource Access
-
-Documentation, annotation formats, official split files, evaluation utilities, project updates, and a curated public subset are being prepared through the [Angkorian-AI project website](https://angkorianai.github.io/).
-
-Because the benchmark contains imagery acquired at protected cultural-heritage sites and remains subject to site-level and data-sharing conditions, access to the complete dataset is considered upon reasonable academic request and approval. Publication of this repository does not by itself grant permission to redistribute restricted benchmark images.
 
 ## Acknowledgements
 
