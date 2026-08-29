@@ -3,7 +3,7 @@
 [![Paper](https://img.shields.io/badge/Paper-Springer-0645AD.svg)](https://doi.org/10.1007/978-3-032-36039-7_23)
 [![Conference](https://img.shields.io/badge/Conference-ICDAR%202026-8A2BE2.svg)](https://icdar2026.org/)
 [![DOI](https://img.shields.io/badge/DOI-10.1007%2F978--3--032--36039--7__23-0A7BBB.svg)](https://doi.org/10.1007/978-3-032-36039-7_23)
-[![KSI-Small](https://img.shields.io/badge/KSI--Small-Coming%20Soon-F59E0B.svg)](#ksi-small-coming-soon)
+[![KSI-B-Small](https://img.shields.io/badge/KSI--B--Small-Hugging%20Face-FFD21E.svg)](https://huggingface.co/datasets/Backkh/Angkorian-KSI-Small)
 [![Access](https://img.shields.io/badge/Full%20Benchmark-Restricted-B91C1C.svg)](#data-access-and-use-restrictions)
 
 ## A Multi-task Benchmark for Khmer Stone Inscription Analysis
@@ -154,18 +154,21 @@ EfficientNetB0 performs best at both page and region levels. Region-level evalua
 | --- | --- | --- |
 | Published paper | Available | [Springer / DOI](https://doi.org/10.1007/978-3-032-36039-7_23) |
 | README and benchmark documentation | Available | This repository |
-| **Angkorian-KSI-Small (KSI-Small)** public test sample | **Coming soon** | Limited public research sample |
+| **Angkorian-KSI-Small (KSI-B-Small)** public test sample | **Available** | [Hugging Face](https://huggingface.co/datasets/Backkh/Angkorian-KSI-Small) |
 | Evaluation code and official split files | Coming soon | This repository / Angkorian-AI |
 | Complete Angkorian-KSI benchmark | Restricted | Approved cultural-heritage research only |
 
-## KSI-Small: Coming Soon
+## KSI-B-Small: Public Release
 
-**Angkorian-KSI-Small (KSI-Small)** will provide a limited public test sample from the benchmark so researchers can inspect the data structure, test input/output formats, and evaluate the basic workflow without receiving the restricted complete collection.
+**Angkorian-KSI-Small (KSI-B-Small)** provides a limited public test sample for the binarization task so researchers can inspect the data structure, test input/output formats, and evaluate the basic workflow without receiving the restricted complete collection.
+
+**Public dataset:** [Backkh/Angkorian-KSI-Small on Hugging Face](https://huggingface.co/datasets/Backkh/Angkorian-KSI-Small)  
+**Official repository:** [back-kh/Angkorian-KSI](https://github.com/back-kh/Angkorian-KSI)
 
 > [!CAUTION]
-> **KSI-Small is an intentionally small, data-limited sample.** It does not represent the scale, diversity, or statistical reliability of the complete Angkorian-KSI benchmark. The results below are preliminary and diagnostic; they should not be treated as definitive model rankings or directly compared with the full-benchmark results reported above.
+> **KSI-B-Small is an intentionally small, data-limited sample.** It does not represent the scale, diversity, or statistical reliability of the complete Angkorian-KSI benchmark. The results below are preliminary and diagnostic; they should not be treated as definitive model rankings or directly compared with the full-benchmark results reported above.
 
-### Preliminary KSI-B Results on Angkorian-KSI-Small
+### Preliminary KSI-B Results on KSI-B-Small
 
 Values are reported as **mean ± standard deviation** from the supplied experimental evaluation.
 
@@ -230,7 +233,7 @@ Patch extraction and augmentation do not increase the number of independent insc
 - No method dominates every metric, demonstrating a trade-off between foreground-stroke agreement, image fidelity, distortion, and runtime.
 Because KSI-Small contains limited data and restricted coverage of sites, historical periods, degradation patterns, and surface conditions, its scores may have high variance. The sample is intended for pipeline verification, format testing, and preliminary reproducibility checks—not for training data-hungry models or drawing broad performance conclusions.
 
-The sample will be released separately with its own permitted-use notice. Availability of KSI-Small will **not** imply open access to, or redistribution rights for, the complete Angkorian-KSI benchmark.
+The public sample is hosted on [Hugging Face](https://huggingface.co/datasets/Backkh/Angkorian-KSI-Small). Availability of KSI-B-Small does **not** imply open access to, or redistribution rights for, the complete Angkorian-KSI benchmark.
 
 ## Data Access and Use Restrictions
 
