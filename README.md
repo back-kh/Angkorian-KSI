@@ -252,17 +252,6 @@ Public visibility of this repository, its documentation, paper figures, results,
 
 Access announcements, documentation, and permitted public resources will be provided through the [Angkorian-AI project website](https://angkorianai.github.io/).
 
-## Paper Information
-
-- **Title:** Angkorian-KSI: A Multi-task Benchmark for Khmer Stone Inscription Analysis
-- **Authors:** Nimol Thuon, Jun Du, Ranysakol Thuon, and Panhapin Theang
-- **Venue:** Document Analysis and Recognition - ICDAR 2026
-- **Series:** Lecture Notes in Computer Science, volume 16974
-- **Pages:** 387-404
-- **Publisher:** Springer, Cham
-- **First published online:** 24 August 2026
-- **DOI:** [10.1007/978-3-032-36039-7_23](https://doi.org/10.1007/978-3-032-36039-7_23)
-
 ## Citation
 
 If Angkorian-KSI supports your research, please cite the published paper:
