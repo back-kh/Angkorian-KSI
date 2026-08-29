@@ -167,28 +167,35 @@ EfficientNetB0 performs best at both page and region levels. Region-level evalua
 
 ### Preliminary KSI-B Results on Angkorian-KSI-Small
 
-| Method | Track | F ↑ | pseudo-F ↑ | PSNR ↑ | DRD ↓ | Seconds/image ↓ |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Otsu | Train-tuned | 0.155 | 0.146 | 2.867 | 102.43 | **0.0077** |
-| Sauvola | Train-tuned | 0.141 | 0.134 | 6.163 | 47.39 | 0.0190 |
-| Wolf-Jolion | Train-tuned | 0.140 | 0.128 | 6.367 | 43.14 | 0.0128 |
-| SAE/DAE | Zero-shot | 0.219 | 0.205 | 5.202 | 62.70 | 0.6111 |
-| DP-LinkNet | Zero-shot | 0.088 | 0.097 | **8.553** | **22.85** | 0.4786 |
-| DocEnTr | Zero-shot | 0.130 | 0.129 | 8.378 | 24.76 | 4.3325 |
-| DocDiff pilot | DIBCO zero-shot | 0.203 | 0.199 | 0.695 | 165.92 | 5.4442 |
-| SAE/DAE | KSI fine-tuned | 0.163 | 0.165 | 6.630 | 41.53 | 0.6107 |
-| DocDiff pilot | KSI fine-tuned | 0.227 | 0.227 | 1.526 | 135.56 | 5.4155 |
-| DE-GAN | Zero-shot | 0.2550 | 0.347 | 3.807 | 89.52 | 3.0661 |
-| PALM-GAN | Zero-shot | 0.3011 | 0.341 | 3.591 | 88.13 | 2.8498 |
+Values are reported as **mean ± standard deviation** from the supplied experimental evaluation.
 
-**Metric directions:** higher values are better for F, pseudo-F, and PSNR; lower values are better for DRD and seconds per image. Bold indicates the best reported value for each metric.
+| Method | Family | Track | F ↑ | pseudo-F ↑ | PSNR ↑ | DRD ↓ | Seconds/image ↓ |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Otsu | Classical/global | Train-tuned | 0.155 ± 0.100 | 0.146 ± 0.113 | 2.867 ± 1.211 | 102.426 ± 34.817 | **0.0077 ± 0.0029** |
+| Sauvola | Classical/local | Train-tuned | 0.141 ± 0.093 | 0.134 ± 0.121 | 6.163 ± 1.838 | 47.394 ± 25.265 | 0.0190 ± 0.0066 |
+| Wolf-Jolion | Classical/local | Train-tuned | 0.140 ± 0.069 | 0.128 ± 0.094 | 6.367 ± 1.463 | 43.138 ± 17.313 | 0.0128 ± 0.0037 |
+| SAE/DAE | Autoencoder | Zero-shot | 0.219 ± 0.152 | 0.205 ± 0.181 | 5.202 ± 2.326 | 62.703 ± 36.833 | 0.6111 ± 0.1908 |
+| DP-LinkNet | CNN | Zero-shot | 0.088 ± 0.149 | 0.097 ± 0.176 | **8.553 ± 0.941** | **22.851 ± 6.053** | 0.4786 ± 0.1635 |
+| U-Net | CNN | Fine-tuned | 0.432 ± 0.140 | 0.452 ± 0.146 | 8.070 ± 0.973 | 26.704 ± 7.621 | 0.7294 ± 0.3370 |
+| SAE/DAE | Autoencoder | Fine-tuned | 0.162 ± 0.138 | 0.164 ± 0.159 | 6.582 ± 1.497 | 42.426 ± 21.570 | 0.6135 ± 0.1927 |
+| DocDiff | Diffusion | DIBCO zero-shot | 0.143 ± 0.117 | 0.139 ± 0.137 | 5.129 ± 1.606 | 59.892 ± 25.102 | 5.6917 ± 1.5151 |
+| DocEnTr | Transformer | Zero-shot | 0.130 ± 0.120 | 0.129 ± 0.142 | 8.378 ± 1.505 | 24.756 ± 10.358 | 4.3325 ± 1.3583 |
+| U-Net | CNN | DIBCO zero-shot | 0.134 ± 0.139 | 0.131 ± 0.157 | 8.538 ± 1.226 | 23.329 ± 8.245 | 0.7307 ± 0.2538 |
+| DocDiff | Diffusion | Fine-tuned | 0.138 ± 0.025 | 0.136 ± 0.024 | 6.562 ± 0.476 | 38.300 ± 6.250 | 5.4655 ± 1.3868 |
+| DE-GAN | GAN | Zero-shot | 0.255 ± 0.179 | 0.247 ± 0.194 | 3.807 ± 2.385 | 89.525 ± 44.531 | 2.0661 ± 0.6800 |
+| DE-GAN | GAN generator | Fine-tuned | 0.487 ± 0.148 | 0.497 ± 0.153 | 7.769 ± 1.037 | 29.575 ± 9.899 | 1.9814 ± 0.6272 |
+| PALM-GAN | CNN-Transformer hybrid | Raw experimental | 0.476 ± 0.173 | 0.486 ± 0.168 | 7.779 ± 1.005 | 29.409 ± 9.681 | 1.9589 ± 0.6166 |
+| **PALM-GAN** | **CNN-Transformer hybrid** | **Fine-tuned** | **0.508 ± 0.165** | **0.519 ± 0.169** | 8.479 ± 0.904 | 26.762 ± 8.712 | 1.9495 ± 0.5920 |
+
+**Metric directions:** higher values are better for F, pseudo-F, and PSNR; lower values are better for DRD and seconds per image. Bold metric values indicate the best reported mean for each metric. Results from different tracks should be interpreted within their respective adaptation settings.
 
 #### Track definitions
 
 - **Train-tuned:** classical method parameters were selected using the available KSI-Small training portion.
-- **Zero-shot:** the pretrained method was evaluated without KSI-Small fine-tuning.
-- **DIBCO zero-shot:** the DocDiff pilot was evaluated in its DIBCO-domain setting without KSI-Small fine-tuning.
-- **KSI fine-tuned:** the model was adapted using the limited KSI-Small training portion.
+- **Zero-shot:** a pretrained model was evaluated without KSI-Small fine-tuning.
+- **DIBCO zero-shot:** a DIBCO-domain model was evaluated without KSI-Small fine-tuning.
+- **Fine-tuned:** the model was adapted using the limited KSI-Small training portion.
+- **Raw experimental:** an experimental model configuration evaluated before KSI-Small fine-tuning.
 ## Data and leakage policy
 
 The supplied JPEG ground truths are converted to grayscale, resampled to source resolution when necessary with an area (`BOX`) filter, thresholded at 128, and stored as lossless PNG. Black is foreground and white is background.
@@ -203,12 +210,12 @@ Patch extraction and augmentation do not increase the number of independent insc
 
 #### Preliminary observations
 
-- PALM-GAN records the highest F score (**0.3011**), while DE-GAN obtains the highest pseudo-F (**0.347**).
-- DP-LinkNet obtains both the highest PSNR (**8.553**) and the lowest DRD (**22.85**).
-- Otsu is the fastest method at **0.0077 seconds per image**.
-- No method dominates every metric, reflecting different sensitivity to stroke preservation, background suppression, and image fidelity.
-- KSI fine-tuning does not consistently improve performance in this pilot. This may reflect the very limited training sample and should not be interpreted as a general conclusion about fine-tuning on the complete benchmark.
-
+- Fine-tuned PALM-GAN achieves the highest F (**0.508 ± 0.165**) and pseudo-F (**0.519 ± 0.169**).
+- Fine-tuned DE-GAN provides the second-highest F (**0.487 ± 0.148**) and pseudo-F (**0.497 ± 0.153**).
+- Zero-shot DP-LinkNet records the highest PSNR (**8.553 ± 0.941**) and the lowest DRD (**22.851 ± 6.053**), despite its comparatively low F measures.
+- Otsu remains the fastest method at **0.0077 ± 0.0029 seconds per image**.
+- Fine-tuning substantially improves U-Net, DE-GAN, and PALM-GAN in this pilot, but does not consistently improve SAE/DAE or DocDiff.
+- No method dominates every metric, demonstrating a trade-off between foreground-stroke agreement, image fidelity, distortion, and runtime.
 Because KSI-Small contains limited data and restricted coverage of sites, historical periods, degradation patterns, and surface conditions, its scores may have high variance. The sample is intended for pipeline verification, format testing, and preliminary reproducibility checks—not for training data-hungry models or drawing broad performance conclusions.
 
 The sample will be released separately with its own permitted-use notice. Availability of KSI-Small will **not** imply open access to, or redistribution rights for, the complete Angkorian-KSI benchmark.
