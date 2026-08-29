@@ -198,6 +198,9 @@ Values are reported as **mean ± standard deviation** from the supplied experime
 - **Raw experimental:** an experimental model configuration evaluated before KSI-Small fine-tuning.
 ## Data and leakage policy
 
+### Training budget
+
+All trainable **KSI-Small** experiments are limited to a maximum of **50 epochs**. Zero-shot evaluations do not perform KSI-Small training, while classical train-tuned methods use parameter selection rather than epoch-based learning. This 50-epoch cap applies only to the KSI-Small pilot experiments and is separate from the full-benchmark configuration reported in the published paper.
 The supplied JPEG ground truths are converted to grayscale, resampled to source resolution when necessary with an area (`BOX`) filter, thresholded at 128, and stored as lossless PNG. Black is foreground and white is background.
 
 KSI model selection uses recorded image-level folds, so patches from one inscription cannot cross train/validation boundaries. The selected model is refit on all ten training pairs before the single final test evaluation. External pretraining uses 166 DIBCO/H-DIBCO/PALM pairs, with the complete 2018 edition held out for validation. No KSI file appears in that external manifest.
