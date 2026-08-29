@@ -107,8 +107,8 @@ DETR obtains the strongest overall layout result, while text-line and non-text d
 | Otsu | 0.18 | 0.51 | 0.23 | 12.0 | 18.7 |
 | Sauvola | 0.22 | 0.44 | 0.28 | 12.6 | 17.5 |
 | DAE | 0.61 | 0.53 | 0.57 | 17.8 | 8.9 |
-| DE-GAN | 0.78 | **0.72** | 0.75 | 21.9 | 4.6 |
-| **PALM-GAN** | **0.80** | **0.72** | **0.77** | **23.4** | **4.2** |
+| [DE-GAN](https://doi.org/10.1109/TPAMI.2020.3022406) | 0.78 | **0.72** | 0.75 | 21.9 | 4.6 |
+| **[PALM-GAN](https://doi.org/10.1007/s10032-024-00472-z)** | **0.80** | **0.72** | **0.77** | **23.4** | **4.2** |
 
 Learning-based approaches substantially outperform classical thresholding. PALM-GAN achieves the best F1, PSNR, and DRD, although faint strokes in heavily eroded regions remain challenging.
 
@@ -175,17 +175,17 @@ Values are reported as **mean ± standard deviation** from the supplied experime
 | Sauvola | Classical/local | Train-tuned | 0.141 ± 0.093 | 0.134 ± 0.121 | 6.163 ± 1.838 | 47.394 ± 25.265 | 0.0190 ± 0.0066 |
 | Wolf-Jolion | Classical/local | Train-tuned | 0.140 ± 0.069 | 0.128 ± 0.094 | 6.367 ± 1.463 | 43.138 ± 17.313 | 0.0128 ± 0.0037 |
 | SAE/DAE | Autoencoder | Zero-shot | 0.219 ± 0.152 | 0.205 ± 0.181 | 5.202 ± 2.326 | 62.703 ± 36.833 | 0.6111 ± 0.1908 |
-| DP-LinkNet | CNN | Zero-shot | 0.088 ± 0.149 | 0.097 ± 0.176 | **8.553 ± 0.941** | **22.851 ± 6.053** | 0.4786 ± 0.1635 |
+| [DP-LinkNet](https://doi.org/10.3837/tiis.2021.05.011) | CNN | Zero-shot | 0.088 ± 0.149 | 0.097 ± 0.176 | **8.553 ± 0.941** | **22.851 ± 6.053** | 0.4786 ± 0.1635 |
 | U-Net | CNN | Fine-tuned | 0.432 ± 0.140 | 0.452 ± 0.146 | 8.070 ± 0.973 | 26.704 ± 7.621 | 0.7294 ± 0.3370 |
 | SAE/DAE | Autoencoder | Fine-tuned | 0.162 ± 0.138 | 0.164 ± 0.159 | 6.582 ± 1.497 | 42.426 ± 21.570 | 0.6135 ± 0.1927 |
-| DocDiff | Diffusion | DIBCO zero-shot | 0.143 ± 0.117 | 0.139 ± 0.137 | 5.129 ± 1.606 | 59.892 ± 25.102 | 5.6917 ± 1.5151 |
-| DocEnTr | Transformer | Zero-shot | 0.130 ± 0.120 | 0.129 ± 0.142 | 8.378 ± 1.505 | 24.756 ± 10.358 | 4.3325 ± 1.3583 |
+| [DocDiff](https://doi.org/10.1145/3581783.3611730) | Diffusion | DIBCO zero-shot | 0.143 ± 0.117 | 0.139 ± 0.137 | 5.129 ± 1.606 | 59.892 ± 25.102 | 5.6917 ± 1.5151 |
+| [DocEnTr](https://doi.org/10.1109/ICPR56361.2022.9956101) | Transformer | Zero-shot | 0.130 ± 0.120 | 0.129 ± 0.142 | 8.378 ± 1.505 | 24.756 ± 10.358 | 4.3325 ± 1.3583 |
 | U-Net | CNN | DIBCO zero-shot | 0.134 ± 0.139 | 0.131 ± 0.157 | 8.538 ± 1.226 | 23.329 ± 8.245 | 0.7307 ± 0.2538 |
-| DocDiff | Diffusion | Fine-tuned | 0.138 ± 0.025 | 0.136 ± 0.024 | 6.562 ± 0.476 | 38.300 ± 6.250 | 5.4655 ± 1.3868 |
-| DE-GAN | GAN | Zero-shot | 0.255 ± 0.179 | 0.247 ± 0.194 | 3.807 ± 2.385 | 89.525 ± 44.531 | 2.0661 ± 0.6800 |
-| DE-GAN | GAN generator | Fine-tuned | 0.487 ± 0.148 | 0.497 ± 0.153 | 7.769 ± 1.037 | 29.575 ± 9.899 | 1.9814 ± 0.6272 |
-| PALM-GAN | CNN-Transformer hybrid | Raw experimental | 0.476 ± 0.173 | 0.486 ± 0.168 | 7.779 ± 1.005 | 29.409 ± 9.681 | 1.9589 ± 0.6166 |
-| **PALM-GAN** | **CNN-Transformer hybrid** | **Fine-tuned** | **0.508 ± 0.165** | **0.519 ± 0.169** | 8.479 ± 0.904 | 26.762 ± 8.712 | 1.9495 ± 0.5920 |
+| [DocDiff](https://doi.org/10.1145/3581783.3611730) | Diffusion | Fine-tuned | 0.138 ± 0.025 | 0.136 ± 0.024 | 6.562 ± 0.476 | 38.300 ± 6.250 | 5.4655 ± 1.3868 |
+| [DE-GAN](https://doi.org/10.1109/TPAMI.2020.3022406) | GAN | Zero-shot | 0.255 ± 0.179 | 0.247 ± 0.194 | 3.807 ± 2.385 | 89.525 ± 44.531 | 2.0661 ± 0.6800 |
+| [DE-GAN](https://doi.org/10.1109/TPAMI.2020.3022406) | GAN generator | Fine-tuned | 0.487 ± 0.148 | 0.497 ± 0.153 | 7.769 ± 1.037 | 29.575 ± 9.899 | 1.9814 ± 0.6272 |
+| [PALM-GAN](https://doi.org/10.1007/s10032-024-00472-z) | CNN-Transformer hybrid | Raw experimental | 0.476 ± 0.173 | 0.486 ± 0.168 | 7.779 ± 1.005 | 29.409 ± 9.681 | 1.9589 ± 0.6166 |
+| **[PALM-GAN](https://doi.org/10.1007/s10032-024-00472-z)** | **CNN-Transformer hybrid** | **Fine-tuned** | **0.508 ± 0.165** | **0.519 ± 0.169** | 8.479 ± 0.904 | 26.762 ± 8.712 | 1.9495 ± 0.5920 |
 
 **Metric directions:** higher values are better for F, pseudo-F, and PSNR; lower values are better for DRD and seconds per image. Bold metric values indicate the best reported mean for each metric. Results from different tracks should be interpreted within their respective adaptation settings.
 
@@ -196,11 +196,20 @@ Values are reported as **mean ± standard deviation** from the supplied experime
 - **DIBCO zero-shot:** a DIBCO-domain model was evaluated without KSI-Small fine-tuning.
 - **Fine-tuned:** the model was adapted using the limited KSI-Small training portion.
 - **Raw experimental:** an experimental model configuration evaluated before KSI-Small fine-tuning.
+#### Referenced Method Papers
+
+- **DE-GAN:** Souibgui, M. A., and Kessentini, Y. [*DE-GAN: A Conditional Generative Adversarial Network for Document Enhancement*](https://doi.org/10.1109/TPAMI.2020.3022406). *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 2022.
+- **DocDiff:** Yang, Z., et al. [*DocDiff: Document Enhancement via Residual Diffusion Models*](https://doi.org/10.1145/3581783.3611730). *Proceedings of the 31st ACM International Conference on Multimedia*, 2023.
+- **PALM-GAN:** Thuon, N., Du, J., Zhang, Z., Ma, J., and Hu, P. [*Generate, transform, and clean: the role of GANs and transformers in palm leaf manuscript generation and enhancement*](https://doi.org/10.1007/s10032-024-00472-z). *International Journal on Document Analysis and Recognition*, 2024.
+- **DocEnTr:** Souibgui, M. A., et al. [*DocEnTr: An End-to-End Document Image Enhancement Transformer*](https://doi.org/10.1109/ICPR56361.2022.9956101). *26th International Conference on Pattern Recognition*, 2022.
+- **DP-LinkNet:** Xiong, W., Jia, X., Yang, D., Ai, M., Li, L., and Wang, S. [*DP-LinkNet: A convolutional network for historical document image binarization*](https://doi.org/10.3837/tiis.2021.05.011). *KSII Transactions on Internet and Information Systems*, 15(5), 1778-1797, 2021.
+
 ## Data and leakage policy
 
 ### Training budget
 
 All trainable **KSI-Small** experiments are limited to a maximum of **50 epochs**. Zero-shot evaluations do not perform KSI-Small training, while classical train-tuned methods use parameter selection rather than epoch-based learning. This 50-epoch cap applies only to the KSI-Small pilot experiments and is separate from the full-benchmark configuration reported in the published paper.
+
 The supplied JPEG ground truths are converted to grayscale, resampled to source resolution when necessary with an area (`BOX`) filter, thresholded at 128, and stored as lossless PNG. Black is foreground and white is background.
 
 KSI model selection uses recorded image-level folds, so patches from one inscription cannot cross train/validation boundaries. The selected model is refit on all ten training pairs before the single final test evaluation. External pretraining uses 166 DIBCO/H-DIBCO/PALM pairs, with the complete 2018 edition held out for validation. No KSI file appears in that external manifest.
